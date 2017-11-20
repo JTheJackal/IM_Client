@@ -29,7 +29,7 @@ public class Chat extends JFrame implements ActionListener {
 
 	JTextArea jta;
 	JTextField jtf;
-	JButton jb;
+	JButton sendBTN;
 	JPanel jp;
 	String ownerId;
 	String friendId;
@@ -43,11 +43,11 @@ public class Chat extends JFrame implements ActionListener {
 		this.friendId = friend;
 		jta = new JTextArea();
 		jtf = new JTextField(15);
-		jb = new JButton("sent");
-		jb.addActionListener(this);
+		sendBTN = new JButton("Send");
+		sendBTN.addActionListener(this);
 		jp = new JPanel();
 		jp.add(jtf);
-		jp.add(jb);
+		jp.add(sendBTN);
 
 		this.add(jta, "Center");
 		this.add(jp, "South");
@@ -63,13 +63,14 @@ public class Chat extends JFrame implements ActionListener {
 		/*
 		String info = m.getSender() + " said to " + m.getGetter() + " :" + m.getCon() + "\r\n";
 		*/
+		System.out.println("A message was received.");
 		System.out.println("Chat"+m.toString());
 		String info = m.get("sender") + " said to " + m.get("getter") + " :" + m.get("connection") + "\r\n";
 		this.jta.append(info);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == jb) {
+		if (arg0.getSource() == sendBTN) {
 			// click "sent" button
 			/*
 			Message m = new Message();
@@ -86,6 +87,7 @@ public class Chat extends JFrame implements ActionListener {
 			m.put("connection", jtf.getText());
 			m.put("sendTime", new java.util.Date().toString());
 			
+			System.out.println("A message was sent.");
 			System.out.println("Chat" +m.toString());
 			
 			// send to server

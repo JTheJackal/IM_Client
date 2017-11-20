@@ -18,7 +18,17 @@ public class ManageChat {
 	//get
 	public static Chat getChat(String loginIdAnFriendId )
 	{
-		return (Chat)hm.get(loginIdAnFriendId);
+		if(hm.get(loginIdAnFriendId) != null) {
+			
+			return (Chat)hm.get(loginIdAnFriendId);
+		}else {
+			
+			System.out.println("There is nothing to return");
+			System.out.println("Creating a  new chat...");
+			return null;
+		}
+		
+		//return (Chat)hm.get(loginIdAnFriendId);
 	}
 	
 }

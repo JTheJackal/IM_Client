@@ -29,11 +29,23 @@ public class ClientConServerThread extends Thread {
 				
 				JSONObject m = (JSONObject) ois.readObject();
 				
-				System.out.println("ClientConServerThread"+m.toString());
+				System.out.println("ClientConServerThread: "+m.toString());
 						
 				if (m.get("mesType").toString().equals(MessageType.message_comm_mes)) {
 					Chat chat = ManageChat.getChat(m.get("getter") + " " + m.get("sender"));
-					chat.showMessage(m);
+					System.out.println("Receiving a message from: " + m.get("sender"));
+					
+					if(chat != null) {
+						chat.showMessage(m);
+					}else {
+						//There is no existing chat window for this conversation.
+						//A new window must open automatically to display the chat.
+						Chat newChat = new Chat(m.get("getter").toString(), m.get("sender").toString());
+						ManageChat.addChat(m.get("getter")+ " " + m.get("sender"), newChat);
+						//chat.showMessage(m);
+						newChat.showMessage(m);
+					}
+
 				}
 				
 				else if (m.get("mesType").toString().equals(MessageType.message_ret_onLineFriend)) {
@@ -50,7 +62,6 @@ public class ClientConServerThread extends Thread {
 						qqFriendList.upateFriend(m);
 					}
 				}
-				
 				
 				/*
 				Message m = (Message) ois.readObject();
