@@ -21,13 +21,18 @@ public class ClientConServer {
 	public boolean sendLoginInfoToServer(Object o) {
 		boolean b = false;
 		try {
+			System.out.println("Creating new socket");
 			s = new Socket("127.0.0.1", 9999);
+			System.out.println("Creating output stream");
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+			System.out.println("Writing object");
 			oos.writeObject(o);
 
+			System.out.println("Creating input stream");
 			ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
 			//Message ms = (Message) ois.readObject();
+			System.out.println("Constructing json object from inbound data");
 			JSONObject ms = (JSONObject) ois.readObject();
 			
 			System.out.println("ClientConServer"+ms.toString());

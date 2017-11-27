@@ -10,5 +10,5 @@ Expand IM_Client project in Eclipse
 Expand lib package
 right click json_simple-1.1.1.jar
 build path -> Add to build path
-Expand view package
-Run ClientLogin.java as java application
+Expand application package
+Run Main.java as java application

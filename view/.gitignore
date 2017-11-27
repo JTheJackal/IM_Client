@@ -1,3 +1,4 @@
-/Chat.class
-/ClientLogin.class
-/FriendList.class
+/ChatWindowController.class
+/ChatWindowUIController.class
+/ClientLoginController.class
+/ClientLoginUIController.class

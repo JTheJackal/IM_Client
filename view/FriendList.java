@@ -15,8 +15,8 @@ import java.awt.event.*;
 
 public class FriendList extends JFrame implements ActionListener, MouseListener {
 
-	JPanel jphy1, jphy2, jphy3;
-	JButton jphy_jb1, jphy_jb2, jphy_jb3;
+	JPanel jphy1, jphy2, jphy3, jphy_jb2;
+	JButton contactsBTN;
 	JScrollPane jsp1;
 	String owner;
 
@@ -41,10 +41,7 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 	public FriendList(String ownerId) {
 		this.owner = ownerId;
 
-		jphy_jb1 = new JButton("My Friend");
-		jphy_jb2 = new JButton("Stranger");
-		jphy_jb2.addActionListener(this);
-		jphy_jb3 = new JButton("Black List");
+		contactsBTN = new JButton("Contacts");
 		jphy1 = new JPanel(new BorderLayout());
 
 		jphy2 = new JPanel(new GridLayout(50, 1, 4, 4));
@@ -65,19 +62,15 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 		}
 
 		jphy3 = new JPanel(new GridLayout(2, 1));
-		jphy3.add(jphy_jb2);
-		jphy3.add(jphy_jb3);
+		//jphy3.add(jphy_jb2);
+		//jphy3.add(jphy_jb3);
 
 		jsp1 = new JScrollPane(jphy2);
 
-		jphy1.add(jphy_jb1, "North");
+		jphy1.add(contactsBTN, "North");
 		jphy1.add(jsp1, "Center");
 		jphy1.add(jphy3, "South");
 
-		jpmsr_jb1 = new JButton("æˆ‘çš„å¥½å�‹");
-		jpmsr_jb1.addActionListener(this);
-		jpmsr_jb2 = new JButton("é™Œç”Ÿäºº");
-		jpmsr_jb3 = new JButton("é»‘å��å�•");
 		jpmsr1 = new JPanel(new BorderLayout());
 
 		jpmsr2 = new JPanel(new GridLayout(20, 1, 4, 4));
@@ -90,14 +83,12 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 		}
 
 		jpmsr3 = new JPanel(new GridLayout(2, 1));
-		jpmsr3.add(jpmsr_jb1);
-		jpmsr3.add(jpmsr_jb2);
 
 		jsp2 = new JScrollPane(jpmsr2);
 
 		jpmsr1.add(jpmsr3, "North");
 		jpmsr1.add(jsp2, "Center");
-		jpmsr1.add(jpmsr_jb3, "South");
+		//jpmsr1.add(jpmsr_jb3, "South");
 
 		cl = new CardLayout();
 		this.setLayout(cl);
