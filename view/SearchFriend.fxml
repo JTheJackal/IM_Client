@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="122.0" prefWidth="219.0" style="-fx-background-color: #DDDDDD;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTextField focusColor="#8080ff" labelFloat="true" layoutX="23.0" layoutY="25.0" prefHeight="28.0" prefWidth="180.0" promptText="Friend's Username">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton buttonType="RAISED" layoutX="83.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Add" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="140.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

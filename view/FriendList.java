@@ -8,8 +8,6 @@ import model.Message;
 
 import javax.swing.*;
 
-import org.json.simple.JSONObject;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -28,9 +26,8 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 	CardLayout cl;
 
 	// update online Friendlist
-	public void upateFriend(JSONObject m) {
-		System.out.println("FriendList"+m.toString());
-		String onLineFriend[] = m.get("connection").toString().split(" ");
+	public void upateFriend(Message m) {
+		String onLineFriend[] = m.getCon().split(" ");
 
 		for (int i = 0; i < onLineFriend.length; i++) {
 
@@ -74,10 +71,10 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 		jphy1.add(jsp1, "Center");
 		jphy1.add(jphy3, "South");
 
-		jpmsr_jb1 = new JButton("æˆ‘çš„å¥½å�‹");
+		jpmsr_jb1 = new JButton("我的好友");
 		jpmsr_jb1.addActionListener(this);
-		jpmsr_jb2 = new JButton("é™Œç”Ÿäºº");
-		jpmsr_jb3 = new JButton("é»‘å��å�•");
+		jpmsr_jb2 = new JButton("陌生�?");
+		jpmsr_jb3 = new JButton("黑名�?");
 		jpmsr1 = new JPanel(new BorderLayout());
 
 		jpmsr2 = new JPanel(new GridLayout(20, 1, 4, 4));

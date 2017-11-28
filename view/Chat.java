@@ -18,8 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.json.simple.JSONObject;
-
 import controlor.ClientConServer;
 import tools.ManageClientConServerThread;
 import model.Message;
@@ -29,7 +27,7 @@ public class Chat extends JFrame implements ActionListener {
 
 	JTextArea jta;
 	JTextField jtf;
-	JButton sendBTN;
+	JButton jb;
 	JPanel jp;
 	String ownerId;
 	String friendId;
@@ -43,11 +41,11 @@ public class Chat extends JFrame implements ActionListener {
 		this.friendId = friend;
 		jta = new JTextArea();
 		jtf = new JTextField(15);
-		sendBTN = new JButton("Send");
-		sendBTN.addActionListener(this);
+		jb = new JButton("sent");
+		jb.addActionListener(this);
 		jp = new JPanel();
 		jp.add(jtf);
-		jp.add(sendBTN);
+		jp.add(jb);
 
 		this.add(jta, "Center");
 		this.add(jp, "South");
@@ -59,37 +57,20 @@ public class Chat extends JFrame implements ActionListener {
 	}
 
 	// show message
-	public void showMessage(JSONObject m) {
-		/*
+	public void showMessage(Message m) {
 		String info = m.getSender() + " said to " + m.getGetter() + " :" + m.getCon() + "\r\n";
-		*/
-		System.out.println("A message was received.");
-		System.out.println("Chat"+m.toString());
-		String info = m.get("sender") + " said to " + m.get("getter") + " :" + m.get("connection") + "\r\n";
 		this.jta.append(info);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == sendBTN) {
+		if (arg0.getSource() == jb) {
 			// click "sent" button
-			/*
 			Message m = new Message();
 			m.setMesType(MessageType.message_comm_mes);
 			m.setSender(this.ownerId);
 			m.setGetter(this.friendId);
 			m.setCon(jtf.getText());
 			m.setSendTime(new java.util.Date().toString());
-			*/
-			JSONObject m = new JSONObject();
-			m.put("mesType", MessageType.message_comm_mes);
-			m.put("sender", this.ownerId);
-			m.put("getter", this.friendId);
-			m.put("connection", jtf.getText());
-			m.put("sendTime", new java.util.Date().toString());
-			
-			System.out.println("A message was sent.");
-			System.out.println("Chat" +m.toString());
-			
 			// send to server
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(
