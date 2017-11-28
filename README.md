@@ -11,4 +11,4 @@ Expand lib package
 right click fontawesomefx-8.9.jar and jfoenix.jar
 build path -> Add to build path
 Expand view package
-Run ClientLogin.java as java application
+Run SigninAndSignup.java as java application
