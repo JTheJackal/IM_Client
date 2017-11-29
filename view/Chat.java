@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.json.simple.JSONObject;
+
 import controlor.ClientConServer;
 import tools.ManageClientConServerThread;
 import model.Message;
@@ -57,8 +59,10 @@ public class Chat extends JFrame implements ActionListener {
 	}
 
 	// show message
-	public void showMessage(Message m) {
-		String info = m.getSender() + " said to " + m.getGetter() + " :" + m.getCon() + "\r\n";
+	public void showMessage(JSONObject m) {
+		System.out.println("A message was received.");
+		System.out.println("Chat"+m.toString());
+		String info = m.get("sender") + " said to " + m.get("getter") + " :" + m.get("connection") + "\r\n";
 		this.jta.append(info);
 	}
 

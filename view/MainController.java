@@ -1,13 +1,20 @@
 package view;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collector.Characteristics;
 
+import model.Message;
+import model.MessageType;
 import model.User;
+import tools.ManageClientConServerThread;
+
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXScrollPane;
+import com.jfoenix.controls.JFXTextField;
+
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -25,7 +32,8 @@ import javafx.stage.StageStyle;
 
 public class MainController implements Initializable {
 
-	private static final String ITEM = "Item ";
+	private String ownerId;
+	private String friendId;
 
 	@FXML
 	private MaterialDesignIconView mainClose;
@@ -43,13 +51,22 @@ public class MainController implements Initializable {
 	private JFXScrollPane chatListPane;
 
 	@FXML
+	private JFXTextField messageInputField;
+
+	@FXML
 	private Label username;
 
 	@FXML
+	private Label friendName;
+
+	@FXML
 	private JFXListView<String> chatList;
-	
-    @FXML
-    private JFXListView<String> messageList;
+
+	@FXML
+	private JFXListView<String> contactList;
+
+	@FXML
+	private JFXListView<String> messageList;
 
 	@FXML
 	void addFriend(MouseEvent event) throws IOException {
@@ -57,11 +74,8 @@ public class MainController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("SearchFriend.fxml"));
 		Parent root = loader.load();
-//		root.setEffect(new DropShadow());
 		Scene scene = new Scene(root);
-//		scene.setFill(Color.TRANSPARENT);
 		Stage stage = new Stage();
-//		stage.getScene().getRoot().setEffect(new DropShadow());
 		stage.setScene(scene);
 		stage.initStyle(StageStyle.UNDECORATED);
 
@@ -77,28 +91,52 @@ public class MainController implements Initializable {
 	@FXML
 	void sendMessage(MouseEvent event) {
 		messageList.getItems().add("...");
+		Message m = new Message();
+		m.setMesType(MessageType.message_comm_mes);
+		m.setSender(ownerId);
+		m.setGetter("2");
+		m.setCon(messageInputField.getText());
+		m.setSendTime(new java.util.Date().toString());
+		// send to server
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(
+					ManageClientConServerThread.getClientConServerThread(ownerId).getS().getOutputStream());
+			oos.writeObject(m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void openChatView(MouseEvent event) {
+		friendName.setText(chatList.getSelectionModel().getSelectedItem());
+	}
+
+	@FXML
+	void openChatInContact(MouseEvent event) {
+		System.out.println(chatList.getItems().size());
+		if (!chatList.getItems().contains(contactList.getSelectionModel().getSelectedItem())) {
+			chatList.getItems().add(contactList.getSelectionModel().getSelectedItem());
+		}
+		friendName.setText(contactList.getSelectionModel().getSelectedItem());
 	}
 
 	@FXML
 	void closeStage(MouseEvent event) {
-		 Platform.exit();
-		 System.exit(0);
+		Stage stage = (Stage) mainClose.getScene().getWindow();
+		stage.close();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		chatList.getItems().add("1");
-		messageList.getItems().add("...");
-
 	}
 
 	public void initData(User user) {
+		for (int i = 0; i < 20; i++) {
+			contactList.getItems().add(Integer.toString(i));
+		}
+		ownerId = user.getUserId();
 		username.setText(user.getUserId());
 	}
-
-	// public void initData(User user) {
-	// System.out.println(user.getUserId()+"....");
-	// this.username.setText(user.getUserId());
-	// }
 
 }
