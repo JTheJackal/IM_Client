@@ -44,7 +44,7 @@
                      </font></Label>
                </children>
             </AnchorPane>
-            <JFXTabPane layoutY="60.0" prefHeight="412.0" prefWidth="280.0" stylesheets="@application.css">
+            <JFXTabPane fx:id="tabPane" layoutY="60.0" prefHeight="412.0" prefWidth="280.0" stylesheets="@application.css">
                <tabs>
                   <Tab text="         Chat        ">
                      <content>

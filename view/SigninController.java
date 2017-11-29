@@ -25,10 +25,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class SigninController implements Initializable {
-	
+
 	private double xOffset = 0;
 	private double yOffset = 0;
-	
+
 	@FXML
 	private MaterialDesignIconView signinClose;
 
@@ -54,9 +54,7 @@ public class SigninController implements Initializable {
 	void closeStage(MouseEvent event) {
 		try {
 			Platform.exit();
-//			System.exit(0);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,38 +76,37 @@ public class SigninController implements Initializable {
 		u.setPasswd(new String(passwordField.getText()));
 
 		if (qqClientUser.checkUser(u)) {
-			
-			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(getClass().getResource("Main.fxml"));
-			Parent root=loader.load();
-			
-			MainController mainController=loader.getController();
-			mainController.initData(u);
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) signIn.getScene().getWindow();
-			root.setOnMousePressed(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					xOffset = event.getSceneX();
-					yOffset = event.getSceneY();
-				}
-			});
-			root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					stage.setX(event.getScreenX() - xOffset);
-					stage.setY(event.getScreenY() - yOffset);
-				}
-			});
-			stage.setScene(scene);
-//			stage.close();
-//			 Stage stage1 = new Stage();
-//			 Main mainView=new Main();
-//			 mainView.user=u;
-//			 mainView.start(stage1);
+			openMainStage(u);
 		} else {
-			System.err.println("..");
+			System.err.println("...........");
 		}
+	}
+
+	private void openMainStage(User u) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Main.fxml"));
+		Parent root = loader.load();
+
+		MainController mainController = loader.getController();
+		mainController.initData(u);
+		Scene scene = new Scene(root);
+		Stage stage = (Stage) signIn.getScene().getWindow();
+		root.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+		root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stage.setX(event.getScreenX() - xOffset);
+				stage.setY(event.getScreenY() - yOffset);
+			}
+		});
+		stage.setScene(scene);
+
 	}
 
 	@Override

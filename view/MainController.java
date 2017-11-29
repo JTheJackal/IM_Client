@@ -13,6 +13,7 @@ import tools.ManageClientConServerThread;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXScrollPane;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -49,6 +50,9 @@ public class MainController implements Initializable {
 
 	@FXML
 	private JFXScrollPane chatListPane;
+
+	@FXML
+	private JFXTabPane tabPane;
 
 	@FXML
 	private JFXTextField messageInputField;
@@ -109,22 +113,30 @@ public class MainController implements Initializable {
 
 	@FXML
 	void openChatView(MouseEvent event) {
-		friendName.setText(chatList.getSelectionModel().getSelectedItem());
+		String friend = chatList.getSelectionModel().getSelectedItem();
+		friendName.setText(friend);
+		friendId = friend;
 	}
 
 	@FXML
 	void openChatInContact(MouseEvent event) {
-		System.out.println(chatList.getItems().size());
-		if (!chatList.getItems().contains(contactList.getSelectionModel().getSelectedItem())) {
-			chatList.getItems().add(contactList.getSelectionModel().getSelectedItem());
+		String friend = contactList.getSelectionModel().getSelectedItem();
+		if (!chatList.getItems().contains(friend)) {
+			chatList.getItems().add(friend);
 		}
-		friendName.setText(contactList.getSelectionModel().getSelectedItem());
+		friendName.setText(friend);
+		friendId = friend;
 	}
 
 	@FXML
 	void closeStage(MouseEvent event) {
-		Stage stage = (Stage) mainClose.getScene().getWindow();
-		stage.close();
+//		Stage stage = (Stage) mainClose.getScene().getWindow();
+//		stage.close();
+		try {
+			Platform.exit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

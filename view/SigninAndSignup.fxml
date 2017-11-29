@@ -29,7 +29,7 @@
          <children>
             <ImageView fitHeight="84.0" fitWidth="81.0" layoutX="154.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../image/1.png" />
+                  <Image url="@../image/default.png" />
                </image>
             </ImageView>
             <JFXTextField fx:id="usernameField" focusColor="#8080fa" labelFloat="true" layoutX="115.0" layoutY="135.0" prefHeight="30.0" prefWidth="185.0" promptText="Your Username" unFocusColor="#8080fa">
