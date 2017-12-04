@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-effect: dropshadow(three-pass-box, black, 10, 0, 4, 4); -fx-background-insets: 12;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
+   <children>
+      <AnchorPane layoutY="-1.0" prefHeight="30.0" prefWidth="700.0" style="-fx-background-color: #1E88E5;">
+         <children>
+            <MaterialDesignIconView fx:id="mainClose" fill="WHITE" glyphName="WINDOW_CLOSE" layoutX="664.0" layoutY="22.0" onMouseClicked="#closeStage" size="18.0" textAlignment="CENTER" />
+            <MaterialDesignIconView fx:id="minimizeButton" fill="WHITE" glyphName="WINDOW_MINIMIZE" layoutX="620.0" layoutY="22.0" onMouseClicked="#minimize" size="18.0" textAlignment="CENTER" />
+            <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_RESTORE" layoutX="642.0" layoutY="22.0" size="18.0" textAlignment="CENTER" />
+            <Label layoutX="14.0" layoutY="7.0" text="Instant Messaging App" textFill="WHITE">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="29.0" prefHeight="470.0" prefWidth="280.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <AnchorPane prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: #42A5F5;" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/1.png" />
+                     </image>
+                  </ImageView>
+                  <MaterialDesignIconView fx:id="addFriendButton" fill="WHITE" glyphName="PLUS" layoutX="211.0" layoutY="39.0" onMouseClicked="#addFriend" size="25.0" textAlignment="CENTER" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="MAGNIFY" layoutX="179.0" layoutY="40.0" size="25.0" text="" textAlignment="CENTER" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="DOTS_VERTICAL" layoutX="241.0" layoutY="39.0" size="25.0" text="" />
+                  <Label fx:id="username" layoutX="68.0" layoutY="17.0" text="UserName" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <JFXTabPane fx:id="tabPane" layoutY="60.0" prefHeight="412.0" prefWidth="280.0" stylesheets="@application.css">
+               <tabs>
+                  <Tab text="         Chat        ">
+                     <content>
+                        <JFXScrollPane fx:id="chatListPane">
+                           <children>
+                              <JFXListView fx:id="chatList" onMouseClicked="#openChatView" prefHeight="99.0" prefWidth="280.0" styleClass="chatList" stylesheets="@application.css" />
+                           </children>
+                        </JFXScrollPane>
+                     </content>
+                  </Tab>
+                  <Tab text="      Contact      ">
+                     <content>
+                     </content>
+                     <content>
+                        <JFXScrollPane>
+                           <children>
+                              <JFXListView fx:id="contactList" onMouseClicked="#openChatInContact" />
+                           </children>
+                        </JFXScrollPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="280.0" layoutY="29.0" prefHeight="470.0" prefWidth="420.0">
+         <children>
+            <AnchorPane layoutY="426.0" prefHeight="45.0" prefWidth="420.0" style="-fx-background-color: #42A5F5;" AnchorPane.bottomAnchor="-1.0">
+               <children>
+                  <MaterialDesignIconView fx:id="sendMessage" fill="WHITE" glyphName="SEND" layoutX="388.0" layoutY="29.0" onMouseClicked="#sendMessage" size="21" text="" textAlignment="CENTER" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="EMOTICON" layoutX="359.0" layoutY="29.0" size="21" />
+                  <JFXTextField fx:id="messageInputField" layoutX="14.0" layoutY="10.0" prefWidth="332.0" style="-fx-background-color: white; -fx-background-radius: 0px;" unFocusColor="#ffffff00" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="60.0" prefWidth="420.0" style="-fx-background-color: #42A5F5;">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/2.png" />
+                     </image>
+                  </ImageView>
+                  <MaterialDesignIconView fill="WHITE" glyphName="MAGNIFY" layoutX="350.0" layoutY="40.0" size="25.0" text="" textAlignment="CENTER" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="DOTS_VERTICAL" layoutX="381.0" layoutY="39.0" size="25.0" text="" />
+                  <Label fx:id="friendName" layoutX="71.0" layoutY="18.0" text="Friend's Name" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <JFXScrollPane layoutY="60.0" prefHeight="366.0" prefWidth="420.0">
+               <children>
+                  <JFXListView fx:id="messageList" prefHeight="366.0" prefWidth="420.0" />
+               </children>
+            </JFXScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

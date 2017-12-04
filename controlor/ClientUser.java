@@ -6,11 +6,19 @@
 
 package controlor;
 
+import org.json.simple.JSONObject;
+
 import model.*;
 
 public class ClientUser {
 
+	/*
 	public boolean checkUser(User u) {
+		return new ClientConServer().sendLoginInfoToServer(u);
+	}
+	*/
+	
+	public boolean checkUser(JSONObject u) {
 		return new ClientConServer().sendLoginInfoToServer(u);
 	}
 }

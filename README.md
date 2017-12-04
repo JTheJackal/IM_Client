@@ -8,7 +8,7 @@ Finish
 
 Expand IM_Client project in Eclipse
 Expand lib package
-right click json_simple-1.1.1.jar
+right click fontawesomefx-8.9.jar and jfoenix.jar
 build path -> Add to build path
 Expand view package
-Run ClientLogin.java as java application
+Run SigninAndSignup.java as java application

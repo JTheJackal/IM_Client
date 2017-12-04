@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="allPane" maxWidth="700.0" minWidth="100.0" prefHeight="455.0" prefWidth="500.0" styleClass="signInPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SigninController">
+   <children>
+      <AnchorPane layoutX="-10.0" prefHeight="227.0" prefWidth="510.0" styleClass="topPane">
+         <children>
+            <MaterialDesignIconView fx:id="signinClose" fill="WHITE" glyphName="WINDOW_CLOSE" layoutX="474.0" layoutY="33.0" onMouseClicked="#closeStage" size="22.0" />
+            <MaterialDesignIconView fx:id="signinMinimize" fill="WHITE" glyphName="WINDOW_MINIMIZE" layoutX="446.0" layoutY="33.0" onMouseClicked="#minimizeStage" size="22.0" />
+            <Label layoutX="109.0" layoutY="43.0" text="Instant Messaging App" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cardPane" layoutX="56.0" layoutY="113.0" prefHeight="288.0" prefWidth="389.0" styleClass="cardPane">
+         <children>
+            <ImageView fitHeight="84.0" fitWidth="81.0" layoutX="154.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/default.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="usernameField" focusColor="#8080fa" labelFloat="true" layoutX="115.0" layoutY="135.0" prefHeight="30.0" prefWidth="185.0" promptText="Your Username" unFocusColor="#8080fa">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="passwordField" focusColor="#8080fa" layoutX="116.0" layoutY="181.0" prefHeight="30.0" prefWidth="185.0" promptText="Your Password" unFocusColor="#8080fa">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton fx:id="signIn" buttonType="RAISED" layoutX="128.0" layoutY="232.0" onAction="#signIn" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Sign In" textFill="white">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="216.0" layoutY="232.0" style="-fx-background-color:rgb(128.0,128.0,255.0);" text="Sign Up" textFill="white">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <MaterialDesignIconView fill="#8080fa" glyphName="ACCOUNT" layoutX="88.0" layoutY="158.0" size="22" />
+            <MaterialDesignIconView fill="#8080fa" glyphName="LOCK" layoutX="88.0" layoutY="204.0" size="22" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="445.0" layoutY="422.0" prefHeight="17.0" prefWidth="33.0" text="Terms" textFill="#5b5b5b" />
+      <Label layoutX="391.0" layoutY="422.0" text="Privacy" textFill="#5b5b5b" />
+      <Label layoutX="344.0" layoutY="422.0" text="Help" textFill="#5b5b5b" />
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" />
+   </effect>
+   <opaqueInsets>
+      <Insets top="12.0" />
+   </opaqueInsets>
+</AnchorPane>

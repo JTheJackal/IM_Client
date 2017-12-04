@@ -22,14 +22,13 @@ import org.json.simple.JSONObject;
 
 import controlor.ClientConServer;
 import tools.ManageClientConServerThread;
-import model.Message;
 import model.MessageType;
 
 public class Chat extends JFrame implements ActionListener {
 
 	JTextArea jta;
 	JTextField jtf;
-	JButton sendBTN;
+	JButton jb;
 	JPanel jp;
 	String ownerId;
 	String friendId;
@@ -43,11 +42,11 @@ public class Chat extends JFrame implements ActionListener {
 		this.friendId = friend;
 		jta = new JTextArea();
 		jtf = new JTextField(15);
-		sendBTN = new JButton("Send");
-		sendBTN.addActionListener(this);
+		jb = new JButton("sent");
+		jb.addActionListener(this);
 		jp = new JPanel();
 		jp.add(jtf);
-		jp.add(sendBTN);
+		jp.add(jb);
 
 		this.add(jta, "Center");
 		this.add(jp, "South");
@@ -60,9 +59,6 @@ public class Chat extends JFrame implements ActionListener {
 
 	// show message
 	public void showMessage(JSONObject m) {
-		/*
-		String info = m.getSender() + " said to " + m.getGetter() + " :" + m.getCon() + "\r\n";
-		*/
 		System.out.println("A message was received.");
 		System.out.println("Chat"+m.toString());
 		String info = m.get("sender") + " said to " + m.get("getter") + " :" + m.get("connection") + "\r\n";
@@ -70,8 +66,18 @@ public class Chat extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == sendBTN) {
+		if (arg0.getSource() == jb) {
 			// click "sent" button
+			
+			
+			JSONObject messageObj = new JSONObject();
+			messageObj.put("mesType", MessageType.message_comm_mes);
+			messageObj.put("sender", this.ownerId);
+			messageObj.put("getter", this.friendId);
+			messageObj.put("con", jtf.getText());
+			messageObj.put("sendTime", new java.util.Date().toString());
+			
+			
 			/*
 			Message m = new Message();
 			m.setMesType(MessageType.message_comm_mes);
@@ -80,21 +86,14 @@ public class Chat extends JFrame implements ActionListener {
 			m.setCon(jtf.getText());
 			m.setSendTime(new java.util.Date().toString());
 			*/
-			JSONObject m = new JSONObject();
-			m.put("mesType", MessageType.message_comm_mes);
-			m.put("sender", this.ownerId);
-			m.put("getter", this.friendId);
-			m.put("connection", jtf.getText());
-			m.put("sendTime", new java.util.Date().toString());
 			
-			System.out.println("A message was sent.");
-			System.out.println("Chat" +m.toString());
 			
 			// send to server
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(
 						ManageClientConServerThread.getClientConServerThread(ownerId).getS().getOutputStream());
-				oos.writeObject(m);
+				//oos.writeObject(m);
+				oos.writeObject(messageObj);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
