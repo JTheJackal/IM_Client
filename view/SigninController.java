@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.simple.JSONObject;
+
 import controlor.ClientUser;
-import model.User;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -71,18 +73,32 @@ public class SigninController implements Initializable {
 		System.out.println(passwordField.getText() + usernameField.getText());
 
 		ClientUser qqClientUser = new ClientUser();
+		
+		JSONObject userObj = new JSONObject();
+		userObj.put("userId", usernameField.getText());
+		userObj.put("passwd", new String(passwordField.getText()));
+		
+		/*
 		User u = new User();
 		u.setUserId(usernameField.getText());
 		u.setPasswd(new String(passwordField.getText()));
+		*/
 
+		/*
 		if (qqClientUser.checkUser(u)) {
 			openMainStage(u);
+		*/
+		
+		if(qqClientUser.checkUser(userObj)) {
+			openMainStage(userObj);
 		} else {
 			System.err.println("...........");
 		}
 	}
 
-	private void openMainStage(User u) throws IOException {
+	//private void openMainStage(User u) throws IOException {
+	private void openMainStage(JSONObject u) throws IOException{
+		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Main.fxml"));
 		Parent root = loader.load();

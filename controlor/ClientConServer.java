@@ -18,7 +18,9 @@ public class ClientConServer {
 	public Socket s;
 
 	// request firstly
-	public boolean sendLoginInfoToServer(Object o) {
+	//public boolean sendLoginInfoToServer(Object o) {
+	public boolean sendLoginInfoToServer(JSONObject o) {
+
 		boolean b = false;
 		try {
 			s = new Socket("127.0.0.1", 9999);
@@ -38,7 +40,9 @@ public class ClientConServer {
 				// create a thread connected between this user and server
 				ClientConServerThread ccst = new ClientConServerThread(s);
 				ccst.start();
-				ManageClientConServerThread.addClientConServerThread(((User) o).getUserId(), ccst);
+				//ManageClientConServerThread.addClientConServerThread(((User) o).getUserId(), ccst);
+				ManageClientConServerThread.addClientConServerThread( o.get("userId").toString(), ccst);
+
 				b = true;
 			} else {
 				s.close();

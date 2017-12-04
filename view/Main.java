@@ -2,7 +2,7 @@ package view;
 
 import java.io.IOException;
 
-import model.User;
+
 
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Application;
@@ -29,7 +29,7 @@ public class Main extends Application {
 	// stage.setIconified(true);
 	// }
 
-	public static User user;
+	//public static User user;
 
 	@Override
 	public void start(Stage primaryStage) {

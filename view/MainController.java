@@ -6,9 +6,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collector.Characteristics;
 
-import model.Message;
+import org.json.simple.JSONObject;
+
 import model.MessageType;
-import model.User;
+
 import tools.ManageClientConServerThread;
 
 import com.jfoenix.controls.JFXListView;
@@ -95,17 +96,28 @@ public class MainController implements Initializable {
 	@FXML
 	void sendMessage(MouseEvent event) {
 		messageList.getItems().add("...");
+		
+		/*
 		Message m = new Message();
 		m.setMesType(MessageType.message_comm_mes);
 		m.setSender(ownerId);
 		m.setGetter("2");
 		m.setCon(messageInputField.getText());
 		m.setSendTime(new java.util.Date().toString());
+		*/
+		
+		JSONObject messageObj = new JSONObject();
+		messageObj.put("mesType", MessageType.message_comm_mes);
+		messageObj.put("sender", ownerId);
+		messageObj.put("getter", "2");
+		messageObj.put("con", messageInputField.getText());
+		messageObj.put("sendTime", new java.util.Date().toString());
 		// send to server
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(
 					ManageClientConServerThread.getClientConServerThread(ownerId).getS().getOutputStream());
-			oos.writeObject(m);
+			//oos.writeObject(m);
+			oos.writeObject(messageObj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,12 +155,18 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 
-	public void initData(User user) {
+	//public void initData(User user) {
+	public void initData(JSONObject user) {
 		for (int i = 0; i < 20; i++) {
 			contactList.getItems().add(Integer.toString(i));
 		}
+		/*
 		ownerId = user.getUserId();
 		username.setText(user.getUserId());
+		*/
+		ownerId = user.get("userId").toString();
+		username.setText(ownerId);
+		
 	}
 
 }

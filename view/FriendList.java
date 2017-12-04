@@ -4,7 +4,7 @@
 package view;
 
 import tools.*;
-import model.Message;
+//import model.Message;
 
 import javax.swing.*;
 
@@ -76,8 +76,8 @@ public class FriendList extends JFrame implements ActionListener, MouseListener 
 
 		jpmsr_jb1 = new JButton("我的好友");
 		jpmsr_jb1.addActionListener(this);
-		jpmsr_jb2 = new JButton("陌生�?");
-		jpmsr_jb3 = new JButton("黑名�?");
+		jpmsr_jb2 = new JButton("陌生�?");
+		jpmsr_jb3 = new JButton("黑名�?");
 		jpmsr1 = new JPanel(new BorderLayout());
 
 		jpmsr2 = new JPanel(new GridLayout(20, 1, 4, 4));
