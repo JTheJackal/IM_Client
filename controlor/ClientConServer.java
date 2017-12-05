@@ -32,10 +32,10 @@ public class ClientConServer {
 			//Message ms = (Message) ois.readObject();
 			JSONObject ms = (JSONObject) ois.readObject();
 			
-			System.out.println("ClientConServer"+ms.toString());
+			System.out.println("ClientConServer object: "+ms.toString());
 			
 			// check user login
-			System.out.println("ClientConServer2"+ms.get("mesType").toString());
+			System.out.println("ClientConServer messageType: "+ms.get("mesType").toString());
 			if (ms.get("mesType").toString().equals("1")) {
 				// create a thread connected between this user and server
 				ClientConServerThread ccst = new ClientConServerThread(s);

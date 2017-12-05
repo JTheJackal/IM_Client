@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="122.0" prefWidth="219.0" style="-fx-background-color: #DDDDDD;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="122.0" prefWidth="219.0" style="-fx-background-color: #DDDDDD;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
    <children>
       <JFXTextField focusColor="#8080ff" labelFloat="true" layoutX="23.0" layoutY="25.0" prefHeight="28.0" prefWidth="180.0" promptText="Friend's Username">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton buttonType="RAISED" layoutX="83.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Add" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="addButton" buttonType="RAISED" layoutX="83.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Add" onMouseClicked="#findFriend" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="140.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="cancelAddFriendButton" buttonType="RAISED" layoutX="140.0" layoutY="73.0" ripplerFill="WHITE" style="-fx-background-color: rgb(128.0,128.0,255.0);" text="Cancel" onMouseClicked="#cancelAddFriend" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>

@@ -9,19 +9,37 @@ import java.net.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import view.Chat;
 import view.FriendList;
+import view.MainController;
 import model.*;
 
 public class ClientConServerThread extends Thread {
 
 	private Socket s;
+	private FXMLLoader loader;
+	private MainController mainController;
 
 	public ClientConServerThread(Socket s) {
 		this.s = s;
 	}
+	
+    public void setController(MainController controller) {
+        this.mainController = controller ;
+    }
 
 	public void run() {
+		
+		//loader = new FXMLLoader();
+		//mainController = loader.getController();
+		
+		//loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+		
+		//mainController = loader.<MainController>getController();
+		
+		
 		while (true) {
 			try {
 
@@ -32,9 +50,17 @@ public class ClientConServerThread extends Thread {
 				System.out.println("ClientConServerThread: "+m.toString());
 						
 				if (m.get("mesType").toString().equals(MessageType.message_comm_mes)) {
-					Chat chat = ManageChat.getChat(m.get("getter") + " " + m.get("sender"));
-					System.out.println("Receiving a message from: " + m.get("sender"));
 					
+					//Receiving a chat message...
+					
+					mainController.showMessage(m);
+					
+					//Chat chat = ManageChat.getChat(m.get("getter") + " " + m.get("sender"));
+					//System.out.println("Receiving a message from: " + m.get("sender"));
+					
+					//New chats appear here.
+					
+					/*
 					if(chat != null) {
 						chat.showMessage(m);
 					}else {
@@ -45,7 +71,10 @@ public class ClientConServerThread extends Thread {
 						//chat.showMessage(m);
 						newChat.showMessage(m);
 					}
-
+					*/
+					
+					
+					
 				}
 				
 				else if (m.get("mesType").toString().equals(MessageType.message_ret_onLineFriend)) {

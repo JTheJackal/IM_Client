@@ -40,20 +40,20 @@ public class Chat extends JFrame implements ActionListener {
 	public Chat(String ownerId, String friend) {
 		this.ownerId = ownerId;
 		this.friendId = friend;
-		jta = new JTextArea();
-		jtf = new JTextField(15);
-		jb = new JButton("sent");
-		jb.addActionListener(this);
-		jp = new JPanel();
-		jp.add(jtf);
-		jp.add(jb);
+		//jta = new JTextArea();
+		//jtf = new JTextField(15);
+		//jb = new JButton("sent");
+		//jb.addActionListener(this);
+		//jp = new JPanel();
+		//jp.add(jtf);
+		//jp.add(jb);
 
-		this.add(jta, "Center");
-		this.add(jp, "South");
-		this.setTitle(ownerId + " is talking with" + friend);
-		this.setIconImage((new ImageIcon("image/qq.gif").getImage()));
-		this.setSize(300, 200);
-		this.setVisible(true);
+		//this.add(jta, "Center");
+		//this.add(jp, "South");
+		//this.setTitle(ownerId + " is talking with" + friend);
+		//this.setIconImage((new ImageIcon("image/qq.gif").getImage()));
+		//this.setSize(300, 200);
+		//this.setVisible(true);
 
 	}
 
@@ -62,41 +62,26 @@ public class Chat extends JFrame implements ActionListener {
 		System.out.println("A message was received.");
 		System.out.println("Chat"+m.toString());
 		String info = m.get("sender") + " said to " + m.get("getter") + " :" + m.get("connection") + "\r\n";
-		this.jta.append(info);
+		//this.jta.append(info);
 	}
-
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == jb) {
-			// click "sent" button
-			
-			
-			JSONObject messageObj = new JSONObject();
-			messageObj.put("mesType", MessageType.message_comm_mes);
-			messageObj.put("sender", this.ownerId);
-			messageObj.put("getter", this.friendId);
-			messageObj.put("con", jtf.getText());
-			messageObj.put("sendTime", new java.util.Date().toString());
-			
-			
-			/*
-			Message m = new Message();
-			m.setMesType(MessageType.message_comm_mes);
-			m.setSender(this.ownerId);
-			m.setGetter(this.friendId);
-			m.setCon(jtf.getText());
-			m.setSendTime(new java.util.Date().toString());
-			*/
-			
-			
-			// send to server
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(
-						ManageClientConServerThread.getClientConServerThread(ownerId).getS().getOutputStream());
-				//oos.writeObject(m);
-				oos.writeObject(messageObj);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	
+	public void sendMessage(JSONObject m) {
+		
+		JSONObject messageObj = new JSONObject();
+		messageObj.put("mesType", MessageType.message_comm_mes);
+		messageObj.put("sender", this.ownerId);
+		messageObj.put("getter", this.friendId);
+		messageObj.put("con", jtf.getText());
+		messageObj.put("sendTime", new java.util.Date().toString());
+		
+		// send to server
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(
+					ManageClientConServerThread.getClientConServerThread(ownerId).getS().getOutputStream());
+			//oos.writeObject(m);
+			oos.writeObject(messageObj);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
