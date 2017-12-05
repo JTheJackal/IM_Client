@@ -66,10 +66,10 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Label friendName;
-	
+
 	@FXML
 	private JFXButton cancelAddFriendButton;
-	
+
 	@FXML
 	private JFXButton addButton;
 
@@ -95,18 +95,18 @@ public class MainController implements Initializable {
 
 		stage.show();
 	}
-	
+
 	@FXML
 	void findFriend(MouseEvent event) throws IOException{
-		
+
 		System.err.println("Finding requested friend...");
-		
+
 		//Retrieve from backend
 	}
-	
+
 	@FXML
 	void cancelAddFriend(MouseEvent event) throws IOException{
-		
+
 		System.err.println("Cancel add friend.");
 		try {
 			Stage stage = (Stage) cancelAddFriendButton.getScene().getWindow();
@@ -127,14 +127,14 @@ public class MainController implements Initializable {
 
 		System.err.println("---");
 		System.err.println("I am sending a message");
-			
+
 		JSONObject messageObj = new JSONObject();
 		messageObj.put("mesType", MessageType.message_comm_mes);
 		messageObj.put("sender", ownerId);
-		messageObj.put("getter", "2");
+		messageObj.put("getter", friendId);
 		messageObj.put("con", messageInputField.getText());
 		messageObj.put("sendTime", new java.util.Date().toString());
-		
+
 		// send to server
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(
@@ -144,7 +144,7 @@ public class MainController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		//Copy to chat window.
 		messageList.getItems().add(messageInputField.getText());
 		messageInputField.setText("");
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
 
 	//public void initData(User user) {
 	public void initData(JSONObject userObject) {
-		
+
 		//Soon to be replaced by an online list of contacts retreived from the server.
 		for (int i = 0; i < 20; i++) {
 			contactList.getItems().add(Integer.toString(i));
@@ -193,20 +193,20 @@ public class MainController implements Initializable {
 		ownerId = user.getUserId();
 		username.setText(user.getUserId());
 		*/
-		
+
 		ownerId = userObject.get("userId").toString();
 		username.setText(ownerId);
-		
+
 		try {
-			
+
 			//Give the thread a reference to this controller.
 			System.err.println("Setting controller in thread");
 			ManageClientConServerThread.getClientConServerThread(ownerId).setController(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		/*
 		try {
 			ois = new ObjectInputStream(
@@ -215,17 +215,17 @@ public class MainController implements Initializable {
 				e.printStackTrace();
 			}
 			*/
-		
+
 		/*
 		JSONObject m;
 		try {
 			m = (JSONObject) ois.readObject();
-			
+
 			if (m.get("mesType").toString().equals(MessageType.message_comm_mes)) {
-				
+
 				System.out.println("Receiving a message from: " + m.get("sender"));
-				
-				
+
+
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -234,17 +234,17 @@ public class MainController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+
 	}
-	
+
 	public void showMessage(JSONObject chatObject) {
-		
+
 		System.out.println("I got a message");
 		System.out.println("The message was from: " + chatObject.get("sender".toString()));
-		
+
 		messageList.getItems().add(chatObject.get("con").toString());
-		
-		
+
+
 	}
 
 }
