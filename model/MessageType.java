@@ -10,4 +10,6 @@ public interface MessageType {
 	String message_comm_mes="3";//common message
 	String message_get_onLineFriend="4";//get online friends
 	String message_ret_onLineFriend="5";//returen online friends
+	String message_createAcc = "6";
+	String message_login = "7";
 }

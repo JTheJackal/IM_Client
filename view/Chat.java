@@ -84,4 +84,10 @@ public class Chat extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }

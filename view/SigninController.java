@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.MessageType;
 
 public class SigninController implements Initializable {
 
@@ -77,6 +78,7 @@ public class SigninController implements Initializable {
 		JSONObject userObj = new JSONObject();
 		userObj.put("userId", usernameField.getText());
 		userObj.put("passwd", new String(passwordField.getText()));
+		userObj.put("messType", new String(MessageType.message_login));
 		
 		/*
 		User u = new User();
