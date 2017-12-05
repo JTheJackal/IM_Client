@@ -47,7 +47,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="216.0" layoutY="232.0" style="-fx-background-color:rgb(128.0,128.0,255.0);" text="Sign Up" textFill="white">
+            <JFXButton fx:id="signUp" buttonType="RAISED" layoutX="216.0" layoutY="232.0" onMouseClicked="#signUp" style="-fx-background-color:rgb(128.0,128.0,255.0);" text="Sign Up" textFill="white">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
