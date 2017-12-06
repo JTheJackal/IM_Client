@@ -35,9 +35,9 @@ public class ClientConServer {
 			System.out.println("ClientConServer object: "+ms.toString());
 			
 			// check user login
-			System.out.println("ClientConServer messageType: "+ms.get("mesType").toString());
+			System.out.println("ClientConServer messageType: "+ms.get("messType").toString());
 			
-			if (ms.get("mesType").toString().equals(MessageType.message_LoginSuccess)) {
+			if (ms.get("messType").toString().equals(MessageType.message_LoginSuccess)) {
 				// create a thread connected between this user and server
 				ClientConServerThread ccst = new ClientConServerThread(s);
 				ccst.start();
@@ -45,7 +45,7 @@ public class ClientConServer {
 				ManageClientConServerThread.addClientConServerThread( o.get("userId").toString(), ccst);
 
 				status = true;
-			} else if (ms.get("mesType").toString().equals(MessageType.message_createAccSuccess)){
+			} else if (ms.get("messType").toString().equals(MessageType.message_createAccSuccess)){
 				status = true;
 			}
 			else {
