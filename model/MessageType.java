@@ -14,4 +14,9 @@ public interface MessageType {
 	String message_login = "7";
 	String message_createAccSuccess = "8";
 	String message_createAccFail = "9";
+	String message_addFriend = "10";
+	String message_addFriendSuccess = "11";
+	String message_addFriendFail = "12";
+	String message_getFriends = "13";
+	String message_sendFriends = "14";
 }

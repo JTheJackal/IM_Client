@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
+import controlor.ClientUser;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -103,15 +104,30 @@ public class MainController implements Initializable {
 	void findFriend(MouseEvent event) throws IOException {
 
 		System.err.println("Finding requested friend...");
+		
 
 		if (friendNameToAdd.getText() != null) {
 			// please provide a method to addFriend, the parameter is 'friendNameToAdd.getText()'
 			// and add the call the method inside if(...)
-			String infoContent = "Add friend successsfully!";
-			showInfo(infoContent);
+			
+			ClientUser clientUser = new ClientUser();
+
+			JSONObject userObj = new JSONObject();
+			userObj.put("userId", "user1"); //CHANGE ME ===============================================================================================================
+			userObj.put("friendId", new String(friendNameToAdd.getText()));	
+			userObj.put("messType", new String(MessageType.message_addFriend));
+
+			if (clientUser.contactServer(userObj)) {//please provide a method to check (if exist) and create account
+				String infoContent = "Add friend successsfully!";
+				showInfo(infoContent);
+			} else {
+				String infoContent = "Failed: Sever Error";
+				showInfo(infoContent);
+			}
+			
 			
 		} else {// fail to add (maybe there is no this user in database.)
-			String infoContent = "Failed. This user doesn't exist!";
+			String infoContent = "Failed: please enter a user ID.";
 			showInfo(infoContent);
 			
 		}
