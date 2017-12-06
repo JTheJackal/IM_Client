@@ -19,9 +19,9 @@ public class ClientConServer {
 
 	// request firstly
 	//public boolean sendLoginInfoToServer(Object o) {
-	public boolean sendLoginInfoToServer(JSONObject o) {
+	public boolean sendInfoToServer(JSONObject o) {
 
-		boolean b = false;
+		boolean status = false;
 		try {
 			s = new Socket("127.0.0.1", 9999);
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -36,15 +36,19 @@ public class ClientConServer {
 			
 			// check user login
 			System.out.println("ClientConServer messageType: "+ms.get("mesType").toString());
-			if (ms.get("mesType").toString().equals("1")) {
+			
+			if (ms.get("mesType").toString().equals(MessageType.message_LoginSuccess)) {
 				// create a thread connected between this user and server
 				ClientConServerThread ccst = new ClientConServerThread(s);
 				ccst.start();
 				//ManageClientConServerThread.addClientConServerThread(((User) o).getUserId(), ccst);
 				ManageClientConServerThread.addClientConServerThread( o.get("userId").toString(), ccst);
 
-				b = true;
-			} else {
+				status = true;
+			} else if (ms.get("mesType").toString().equals(MessageType.message_createAccSuccess)){
+				status = true;
+			}
+			else {
 				s.close();
 			}
 
@@ -53,7 +57,7 @@ public class ClientConServer {
 		} finally {
 
 		}
-		return b;
+		return status;
 	}
 
 	public void SendInfoToServer(Object o) {

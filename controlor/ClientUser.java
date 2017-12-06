@@ -18,7 +18,7 @@ public class ClientUser {
 	}
 	*/
 	
-	public boolean checkUser(JSONObject u) {
-		return new ClientConServer().sendLoginInfoToServer(u);
+	public boolean contactServer(JSONObject u) {
+		return new ClientConServer().sendInfoToServer(u);
 	}
 }

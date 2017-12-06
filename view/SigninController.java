@@ -81,7 +81,7 @@ public class SigninController implements Initializable {
 		userObj.put("passwd", new String(passwordField.getText()));	
 		userObj.put("messType", new String(MessageType.message_createAcc));
 
-		if (true) {//please provide a method to check (if exist) and create account
+		if (clientUser.contactServer(userObj)) {//please provide a method to check (if exist) and create account
 			String infoContent = "You created a new account successfully. Please sign in.";
 			showInfo(infoContent);			
 			usernameField.setText("");
@@ -106,7 +106,7 @@ public class SigninController implements Initializable {
 		userObj.put("passwd", new String(passwordField.getText()));
 		userObj.put("messType", new String(MessageType.message_login));
 
-		if (clientUser.checkUser(userObj)) {
+		if (clientUser.contactServer(userObj)) {
 			openMainStage(userObj);
 		} else {
 			String errorContent = "sorry, username or password is wrong, please input them again.";
